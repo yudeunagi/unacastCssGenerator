@@ -1,0 +1,237 @@
+﻿<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>サーバー表示ウィンドウ</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./css/style-server.css">
+  <link rel="stylesheet" href="./css/generator.css">
+  <script type="text/javascript" src="./js/generator.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+  <!-- ここがレス表示サンプル部分、ここも実際のOBSのレイアウトのように調整できるようにしたい（願望）-->
+  <div id="generator-container">
+    <div id="parent">
+      <ul id="res-list" class="brakeOn">
+        <li class="list-item">
+          <span class="icon-block">
+            <img class="icon" src="./img/random/peca.png">
+          </span>
+          <div class="content">
+            <span class="resNumber">257</span>
+            <span class="name">名も無きWarrior</span><span class="date">2021/01/25(月) 14:44:54.02</span><br>
+            <span class="res">
+              Hey Siri!!
+            </span>
+          </div>
+        </li>
+        <li class="list-item">
+          <span class="icon-block">
+            <img class="icon" src="./img/random/jouzu.png">
+          </span>
+          <div class="content">
+            <span class="resNumber">256</span>
+            <span class="name">名も無きWarrior</span><span class="date">2021/01/25(月) 14:44:29.09</span><br>
+            <span class="res">
+              Welcome to Osiri Land...
+            </span>
+          </div>
+        </li>
+        <li class="list-item">
+          <span class="icon-block">
+            <img class="icon" src="./img/random/suta_1.png">
+          </span>
+          <div class="content">
+            <span class="resNumber">255</span>
+            <span class="name">名も無きWarrior</span><span class="date">2021/01/25(月) 14:44:01.91</span><br>
+            <span class="res">
+              y)おしりらんど。<br>
+              はーじまーるよー！！
+            </span>
+          </div>
+        </li>
+        <li id="initMessage">
+          <span class="icon"> </span>
+          <span class="name">お尻ランド開園</span>
+          <span class="res"> </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ここから設定部 -->
+  <content>
+    <div class="tabs">
+      <input id="general-tab" type="radio" name="tab_item" checked>
+      <label class="tab_item" for="general-tab">総合</label>
+
+      <input id="icon-tab" type="radio" name="tab_item">
+      <label class="tab_item" for="icon-tab">アイコン</label>
+
+      <input id="res-tab" type="radio" name="tab_item">
+      <label class="tab_item" for="res-tab">レス表示部</label>
+
+      <input id="number-tab" type="radio" name="tab_item">
+      <label class="tab_item" for="number-tab">レス番号</label>
+
+      <input id="name-tab" type="radio" name="tab_item">
+      <label class="tab_item" for="name-tab">名前</label>
+
+      <input id="date-tab" type="radio" name="tab_item">
+      <label class="tab_item" for="date-tab">日付</label>
+
+      <input id="tips-tab" type="radio" name="tab_item">
+      <label class="tab_item" for="tips-tab">TIPS</label>
+
+
+      <!-- 全般設定 -->
+      <div class="tab-content" id="setting-general">
+
+        <label>背景色
+          <input type="color" id="bg-color" name="bg-color" value="#000000" oninput="inputBgColor()" onchange="changeGeneral()" />
+        </label>
+        <br/>
+        <label>背景透明度
+          <input type="range" id="bg-alpha" name="bg-alpha" value="20" min="0" max="100" oninput="inputBgColor()" onchange="changeGeneral()" />
+        </label>
+        <br/>
+        背景色の透明度(スライダー 0-100 デフォ20、JSでは10で割る)
+        <br/>
+        ・フォント指定
+        <br/>
+        各項目の表示、非表示設定
+        <br/>
+        1280x720の大本divを用意する、レス表示部のサイズを設定できるようにする
+        <br/>
+        ラ時をボタンで左寄せ、右寄せと 上寄せ、下寄せの設定
+
+CSSジェネレータ、個別に設定するのでなくてまず親となる設定を決めて
+親の設定を継承するか個別に設定するかできるようにしたほうがいい気がしてきた。
+
+      </div>
+      <!-- アイコン設定 -->
+      <div class="tab-content" id="setting-icon">
+        サイズ
+        ・角丸(0-50 デフォ50)
+        ・マージン
+      </div>
+      <!-- レス設定 -->
+      <div class="tab-content" id="setting-res">
+設定するときはチェックボックスをONにしてね。
+        <table class="setting-table">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th>個別設定</th>
+              <th>項目</th>
+              <th>設定値</th>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="res-color-inherit" terget="res-color"
+                onchange="toggleTergetForm(this);inputResColor();changeRes()" /></td>
+              <td>文字色</td>
+              <td><input type="color" id="res-color" name="res-color" value="#ffffff" disabled="disabled"
+                oninput="inputResColor(this.value)" onchange="changeRes()" /></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="res-size-inherit" terget="res-size"
+                onchange="toggleTergetForm(this);inputResSize();changeRes()" /></td>
+              <td>文字サイズ</td>
+              <td><input type="range" id="res-size" name="res-size" value="18" min="4" max"72" disabled="disabled"
+                oninput="inputResSize(this.value)" onchange="changeRes()" /></td>
+            </tr>
+            <tr>
+              <td rowspan="2"><input type="checkbox" id="res-bd-size-inherit" terget="res-bd-size"
+                onchange="toggleTergetForm(this);inputResBorder();changeRes()" /></td>
+              <td>フチの色</td>
+              <td><input type="color" id="res-bd-color" name="bd-color" value="#333333"
+                oninput="inputResBorder()" onchange="changeRes()" /></td>
+            </tr>
+            <tr>
+              <td>フチのサイズ</td>
+              <td><input type="range" id="res-bd-size" name="res-bd-size" value="1" min="0" max="3" disabled="disabled"
+                 oninput="inputResBorder()" onchange="changeRes()" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          ※フチの太さを最大にするとCSSがマジパネェことになるのでお気を付けください。
+        </p>
+      </div>
+      <!-- レス番設定 -->
+      <div class="tab-content" id="setting-number">
+        <label>文字色
+          <input type="color" id="num-color" name="num-color" value="#55ff55" oninput="inputNumColor(this.value)" onchange="changeNum()" />
+        </label>
+        <br/>
+        <label>文字サイズ
+          <input type="range" id="num-size" name="num-size" value="18" min="4" max"72" oninput="inputNumSize(this.value)" onchange="changeNum()" />
+        </label>
+        <br/>
+        <label>フチの色
+          <input type="color" id="num-bd-color" name="num-bd-color" value="#333333" oninput="inputNumBdColor(this.value)" onchange="changeNum()" />
+        </label>
+      </div>
+      <!-- 名前設定 -->
+      <div class="tab-content" id="setting-name">
+        <label>文字色
+          <input type="color" id="name-color" name="name-color" value="#55ff55" oninput="inputNameColor(this.value)" onchange="changeName()" />
+        </label>
+        <br/>
+        <label>文字サイズ
+          <input type="range" id="name-size" name="name-size" value="18" min="4" max"72" oninput="inputNameSize(this.value)" onchange="changeName()" />
+        </label>
+        <br/>
+        <label>フチの色
+          <input type="color" id="name-bd-color" name="name-bd-color" value="#333333" oninput="inputNameBdColor(this.value)" onchange="changeName()" />
+        </label>
+      </div>
+      <!-- 日付設定 -->
+      <div class="tab-content" id="setting-date">
+        <label>文字色
+          <input type="color" id="date-color" name="date-color" value="#feffa0" oninput="inputDateColor(this.value)" onchange="changeDate()" />
+        </label>
+        <br/>
+        <label>文字サイズ
+          <input type="range" id="date-size" name="date-size" value="14" min="4" max"72" oninput="inputDateSize(this.value)" onchange="changeDate()" />
+        </label>
+        <br/>
+        <label>フチの色
+          <input type="color" id="date-bd-color" name="date-bd-color" value="#333333" oninput="inputDateBdColor(this.value)" onchange="changeDate()" />
+        </label>
+      </div>
+
+      <!-- ポイント -->
+      <div class="tab-content" id="tips-tab">
+        <h4>良い感じのCSSにするポイント</h4>
+        <ul>
+          <li>文字の色を原色（<font color="#ff0000">真っ赤</font>とか<font color="#0000ff">真っ青</font>とか）にすると読みづらいので
+            レス表示部の色は白や黒、又は薄めの色を選ぶと良いです。</li>
+          <li>名前やレス番号は比較的濃い色でも何とかなります。</li>
+          <li>フチの色は基本的に白(#ffffff)か黒(unacastデフォだと#333333)が使いやすいです、文字が明るい色なら黒、暗い色なら白を選ぶと良いでしょう。</li>
+        </ul>
+あとなんか良いコツ知ってたらコメント欄にオナシャス！！
+
+<h4>文字のフチに関して</h4>
+※フチの太さに関してはCSSでtext-stroke というものがあるのですが
+これは使い勝手がイマイチなのでtext-shadowを使ってフチを表現しています。
+文字のフチ取りに関していい方法ご存知の方はご一報をください。
+
+      </div>
+
+    </div>
+
+    <!-- CSS出力部分 -->
+    <div id="outputArea">
+      <textarea id="outputText" rows="10" cols="50">ここにCSSが出力されます</textarea>
+    </div>
+
+  </content>
+
+</body>
+
+</html>

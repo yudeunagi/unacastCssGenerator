@@ -1,0 +1,96 @@
+/*CSSジェネレータ用のCSSファイル*/
+body{
+  overflow: auto; /*スクロールバー表示*/
+}
+
+/*サンプル表示部の高さ設定*/
+div#generator-container {
+  height: auto;
+}
+div#parent{
+  height: auto;
+}
+
+/*CSS出力部の設定*/
+div#outputArea{
+  background-color: #ffffff;
+  height: 100%;
+  padding: 20px;
+}
+
+/*CSS出力されるテキストエリア設定*/
+textarea#outputText{
+  width: 100%;
+}
+
+/*テーブル*/
+table.setting-table{
+  color : #333;
+}
+
+/*タブ切り替え全体のスタイル*/
+.tabs {
+  margin-top: 50px;
+  padding-bottom: 40px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  color: #333;
+  text-shadow:0px 0px;
+  font-family: 'ＭＳ Ｐゴシック', 'メイリオ', sans-serif;
+
+}
+
+/*タブのスタイル*/
+.tab_item {
+  width: calc(100%/7);
+  height: 50px;
+  border-bottom: 3px solid #5ab4bd;
+  background-color: #e6e6e6;
+  line-height: 50px;
+  font-size: 16px;
+  text-align: center;
+  color: #ababab;
+  display: block;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.tab_item:hover {
+  opacity: 0.75;
+}
+
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
+  display: none;
+}
+
+/*タブ切り替えの中身のスタイル*/
+.tab-content {
+  display: none;
+  padding: 40px 40px 0;
+  clear: both;
+  overflow: hidden;
+}
+
+
+/*選択されているタブのコンテンツのみを表示*/
+#general-tab:checked ~ #setting-general,
+#icon-tab:checked ~ #setting-icon,
+#res-tab:checked ~ #setting-res,
+#number-tab:checked ~ #setting-number,
+#name-tab:checked ~ #setting-name,
+#date-tab:checked ~ #setting-date,
+#tips-tab:checked ~ #tips-tab,
+#dummy:checked ~ #dummy_content
+
+{
+  display: block;
+}
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked + .tab_item {
+  background-color: #5ab4bd;
+  color: #fff;
+}

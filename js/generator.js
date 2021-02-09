@@ -37,7 +37,8 @@ function generateTextShadowCss(size, color){
   return result;
 }
 
-function toggleTergetForm(obj){
+//フォームの有効/無効切り替え
+function toggleTargetForm(obj){
   var ch = obj.checked;
   var tgt = obj.getAttribute('terget');
 
@@ -45,16 +46,35 @@ function toggleTergetForm(obj){
 
 }
 
+//表示日表示切替
+function toggleTargetDisp(obj){
+
+  //対象クラス取得
+  var targetClass = obj.getAttribute('targetclass');
+  //表示タイプ取得
+  var dispType = obj.getAttribute('disptype');
+  //チェック状態取得
+  var checked = obj.checked;
+
+  if(checked)
+  {
+    $(`${targetClass}`).css( { 'display' : `${dispType}` });
+  }
+  else
+  {
+    $(`${targetClass}`).css( { 'display' : 'none' });
+  }
+}
 
 ///////////////////////////////////////
 ////全般変更////
 ///////////////////////////////////////
-var resGeneral = ''; //CSS出力用変数
+var baseCss = ''; //CSS出力用変数
 var rgba = 'rgba(0, 0, 0, 0.2)'; //背景色デフォルト
 //背景色変更
 function inputBgColor(color) {
-  var bgColor = hexToRGB($("#bg-color").val()); //カラーピッカーで選択したrgbを配列で取得
-  var bgAlpha = $("#bg-alpha").val() / 100; //スライダの値 / 100
+  var bgColor = hexToRGB($("#base-bg-color").val()); //カラーピッカーで選択したrgbを配列で取得
+  var bgAlpha = $("#base-bg-alpha").val() / 100; //スライダの値 / 100
 
   // バッククォート(`)はシングル、ダブルクォートと同じように使えるし
   // その中で${変数名} って書くと変数使えるけど存在に慣れない。
@@ -164,42 +184,81 @@ function changeRes() {
 ////レス番号表示部変更////
 ///////////////////////////////////////
 var numCss = ''; //CSS出力用変数
-//レスサイズ変更、行の高さも変更する
-function inputNumSize(size) {
-  $(".resNumber").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
-//  console.log(size);
-}
-//レスカラー変更
-function inputNumColor(color) {
-  $(".resNumber").css( { 'color' : color });
+//レス番カラー変更
+function inputNumberColor() {
+  var color = $('#number-color').val();
+  if($('#number-color-inherit').prop('checked'))
+  {
+    //ピッカーの値を取得
+    $(".resNumber").css( { 'color' : color });
+  }
+  else
+  {
+    //ピッカーの値を取得
+    $(".resNumber").css( { 'color' : '#55ff55' });
+  }
 }
 
+//レス番サイズ変更、行の高さも変更する
+function inputNumberSize() {
+  //サイズ取得
+  var size = $('#number-size').val();
+  if($('#number-size-inherit').prop('checked'))
+  {
+    //継承しないならスラーダーの値を設定。
+    $(".resNumber").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
+  }
+  else
+  {
+    //継承設定なら継承
+    $(".resNumber").css( { 'font-size' : 'inherit' ,'line-height' : 'inherit'});
+  }
+}
 //ボーダーカラー変更
-var numShadow = '1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333'; //デフォルト値
-var numBdSize = '1';
-function inputNumBdColor(color) {
-  var s = numBdSize;
-  numShadow = `${s}px ${s}px 0 ${color}, -${s}px ${s}px 0 ${color}, ${s}px -${s}px 0 ${color}, -${s}px -${s}px 0 ${color}`
-  $(".resNumber").css( { 'text-shadow' : numShadow});
-//  $(".res").css( { 'text-stroke' : `${s}px ${color}`}); //text-strokeだと見た目がいまいち
-//  text-shadow: 1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333;
+var numberShadow = '1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333'; //デフォルト値
+var numberBdSize = '1';
+function inputNumberBorder() {
+  var s = $('#number-bd-size').val();
+  var col = $('#number-bd-color').val();
+
+  if($('#number-bd-size-inherit').prop('checked')){
+    numberShadow = generateTextShadowCss(s,col);
+    $(".resNumber").css( { 'text-shadow' : numberShadow});
+  }
+  else
+  {
+    $(".resNumber").css( { 'text-shadow' : 'inherit'});
+  }
 
 }
-
 //入力完了時にCSS出力
-function changeNum() {
-  var numColor = $("#num-color").val();
-  var numSize = $("#num-size").val();
+function changeNumber() {
+  var numColor = $("#number-color").val();
+  var numSize = $("#number-size").val();
   var numHeight = Math.ceil(numSize * 1.3);
   numCss =
   '' + '\n' +
   '/*レス番号表示部分の設定です*/' + '\n' +
-  '.resNumber {' + '\n' +
-  '  color:' + numColor + ';' + '\n' +
-  '  font-size:' + numSize + 'px;' + '\n' +
-  '  line-height:' + numHeight + 'px;' + '\n' +
-  '  text-shadow:' + numShadow + ';' + '\n' +
-  '}' + '\n';
+  '.resNumber {' + '\n';
+
+  //文字色を個別設定の場合出力
+  if($('#number-color-inherit').prop('checked'))
+  {
+    numCss += '  color:' + numColor + ';' + '\n' ;
+  }
+  //文字サイズを個別設定の場合出力
+  if($('#number-size-inherit').prop('checked'))
+  {
+    numCss +=
+    '  font-size:' + numSize + 'px;' + '\n' +
+    '  line-height:' + numHeight + 'px;' + '\n';
+  }
+  if($('#number-bd-size-inherit').prop('checked'))
+  {
+    numCss += '  text-shadow:' + numberShadow + ';' + '\n';
+  }
+
+  numCss += '}' + '\n';
   //CSS出力
   outputCSS();
 }
@@ -208,28 +267,53 @@ function changeNum() {
 ////名前表示部変更////
 ///////////////////////////////////////
 var nameCss = ''; //CSS出力用変数
-//レスサイズ変更、行の高さも変更する
-function inputNameSize(size) {
-  $(".name").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
-//  console.log(size);
-}
-//レスカラー変更
-function inputNameColor(color) {
-  $(".name").css( { 'color' : color });
+//名前カラー変更
+function inputNameColor() {
+  var color = $('#name-color').val();
+  if($('#name-color-inherit').prop('checked'))
+  {
+    //ピッカーの値を取得
+    $(".name").css( { 'color' : color });
+  }
+  else
+  {
+    //ピッカーの値を取得
+    $(".name").css( { 'color' : '#55ff55' });
+  }
 }
 
+//名前サイズ変更、行の高さも変更する
+function inputNameSize() {
+  //サイズ取得
+  var size = $('#name-size').val();
+  if($('#name-size-inherit').prop('checked'))
+  {
+    //継承しないならスラーダーの値を設定。
+    $(".name").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
+  }
+  else
+  {
+    //継承設定なら継承
+    $(".name").css( { 'font-size' : 'inherit' ,'line-height' : 'inherit'});
+  }
+}
 //ボーダーカラー変更
 var nameShadow = '1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333'; //デフォルト値
 var nameBdSize = '1';
-function inputNameBdColor(color) {
-  var s = nameBdSize;
-  nameShadow = `${s}px ${s}px 0 ${color}, -${s}px ${s}px 0 ${color}, ${s}px -${s}px 0 ${color}, -${s}px -${s}px 0 ${color}`
-  $(".name").css( { 'text-shadow' : nameShadow});
-//  $(".res").css( { 'text-stroke' : `${s}px ${color}`}); //text-strokeだと見た目がいまいち
-//  text-shadow: 1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333;
+function inputNameBorder() {
+  var s = $('#name-bd-size').val();
+  var col = $('#name-bd-color').val();
+
+  if($('#name-bd-size-inherit').prop('checked')){
+    nameShadow = generateTextShadowCss(s,col);
+    $(".name").css( { 'text-shadow' : nameShadow});
+  }
+  else
+  {
+    $(".name").css( { 'text-shadow' : 'inherit'});
+  }
 
 }
-
 //入力完了時にCSS出力
 function changeName() {
   var nameColor = $("#name-color").val();
@@ -237,13 +321,27 @@ function changeName() {
   var nameHeight = Math.ceil(nameSize * 1.3);
   nameCss =
   '' + '\n' +
-  '/*レス番号表示部分の設定です*/' + '\n' +
-  '.name {' + '\n' +
-  '  color:' + nameColor + ';' + '\n' +
-  '  font-size:' + nameSize + 'px;' + '\n' +
-  '  line-height:' + nameHeight + 'px;' + '\n' +
-  '  text-shadow:' + nameShadow + ';' + '\n' +
-  '}' + '\n';
+  '/*名前部分の設定です*/' + '\n' +
+  '.name {' + '\n';
+
+  //文字色を個別設定の場合出力
+  if($('#name-color-inherit').prop('checked'))
+  {
+    nameCss += '  color:' + nameColor + ';' + '\n' ;
+  }
+  //文字サイズを個別設定の場合出力
+  if($('#name-size-inherit').prop('checked'))
+  {
+    nameCss +=
+    '  font-size:' + nameSize + 'px;' + '\n' +
+    '  line-height:' + nameHeight + 'px;' + '\n';
+  }
+  if($('#name-bd-size-inherit').prop('checked'))
+  {
+    nameCss += '  text-shadow:' + nameShadow + ';' + '\n';
+  }
+
+  nameCss += '}' + '\n';
   //CSS出力
   outputCSS();
 }
@@ -252,28 +350,54 @@ function changeName() {
 ////日付表示部変更////
 ///////////////////////////////////////
 var dateCss = ''; //CSS出力用変数
-//レスサイズ変更、行の高さも変更する
-function inputDateSize(size) {
-  $(".date").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
-//  console.log(size);
-}
-//レスカラー変更
-function inputDateColor(color) {
-  $(".date").css( { 'color' : color });
+//名前カラー変更
+function inputDateColor() {
+  var color = $('#date-color').val();
+  if($('#date-color-inherit').prop('checked'))
+  {
+    //ピッカーの値を取得
+    $(".date").css( { 'color' : color });
+  }
+  else
+  {
+    //ピッカーの値を取得
+    $(".date").css( { 'color' : '#feffa0' });
+  }
 }
 
+//名前サイズ変更、行の高さも変更する
+function inputDateSize() {
+  //サイズ取得
+  var size = $('#date-size').val();
+  console.log(size);
+  if($('#date-size-inherit').prop('checked'))
+  {
+    //継承しないならスラーダーの値を設定。
+    $(".date").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
+  }
+  else
+  {
+    //継承設定なら継承
+    $(".date").css( { 'font-size' : '0.8em' ,'line-height' : 'inherit'});
+  }
+}
 //ボーダーカラー変更
 var dateShadow = '1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333'; //デフォルト値
 var dateBdSize = '1';
-function inputDateBdColor(color) {
-  var s = dateBdSize;
-  dateShadow = `${s}px ${s}px 0 ${color}, -${s}px ${s}px 0 ${color}, ${s}px -${s}px 0 ${color}, -${s}px -${s}px 0 ${color}`
-  $(".date").css( { 'text-shadow' : dateShadow});
-//  $(".res").css( { 'text-stroke' : `${s}px ${color}`}); //text-strokeだと見た目がいまいち
-//  text-shadow: 1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333;
+function inputDateBorder() {
+  var s = $('#date-bd-size').val();
+  var col = $('#date-bd-color').val();
+
+  if($('#date-bd-size-inherit').prop('checked')){
+    dateShadow = generateTextShadowCss(s,col);
+    $(".date").css( { 'text-shadow' : dateShadow});
+  }
+  else
+  {
+    $(".date").css( { 'text-shadow' : 'inherit'});
+  }
 
 }
-
 //入力完了時にCSS出力
 function changeDate() {
   var dateColor = $("#date-color").val();
@@ -281,13 +405,27 @@ function changeDate() {
   var dateHeight = Math.ceil(dateSize * 1.3);
   dateCss =
   '' + '\n' +
-  '/*レス番号表示部分の設定です*/' + '\n' +
-  '.date {' + '\n' +
-  '  color:' + dateColor + ';' + '\n' +
-  '  font-size:' + dateSize + 'px;' + '\n' +
-  '  line-height:' + dateHeight + 'px;' + '\n' +
-  '  text-shadow:' + dateShadow + ';' + '\n' +
-  '}' + '\n';
+  '/*日付部分の設定です*/' + '\n' +
+  '.date {' + '\n';
+
+  //文字色を個別設定の場合出力
+  if($('#date-color-inherit').prop('checked'))
+  {
+    dateCss += '  color:' + dateColor + ';' + '\n' ;
+  }
+  //文字サイズを個別設定の場合出力
+  if($('#date-size-inherit').prop('checked'))
+  {
+    dateCss +=
+    '  font-size:' + dateSize + 'px;' + '\n' +
+    '  line-height:' + dateHeight + 'px;' + '\n';
+  }
+  if($('#date-bd-size-inherit').prop('checked'))
+  {
+    dateCss += '  text-shadow:' + dateShadow + ';' + '\n';
+  }
+
+  dateCss += '}' + '\n';
   //CSS出力
   outputCSS();
 }
@@ -297,7 +435,7 @@ function changeDate() {
 function outputCSS()
 {
   //テキストエリアへ反映
-  var result = resGeneral + resCss + numCss + nameCss + dateCss;
+  var result = baseCss + resCss + numCss + nameCss + dateCss;
   //console.log(result);
   $("#outputText").val(result);
 }

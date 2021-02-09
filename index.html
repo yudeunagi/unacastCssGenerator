@@ -88,18 +88,64 @@
 
       <!-- 全般設定 -->
       <div class="tab-content" id="setting-general">
-ts
-        <label>背景色
-          <input type="color" id="base-bg-color" name="bg-color" value="#000000" oninput="inputBgColor()" onchange="changeBase()" />
+        <table class="setting-table">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th>項目</th>
+              <th>設定値</th>
+            </tr>
+            <tr>
+              <td>背景色</td>
+              <td><input type="color" id="base-bg-color" name="bg-color" value="#000000"
+                 oninput="inputBgColor()" onchange="changeBase()" /></td>
+            </tr>
+            <tr>
+              <td>背景透明度</td>
+              <td><input type="range" id="base-bg-alpha" name="bg-alpha" value="20" min="0" max="100"
+                 oninput="inputBgColor()" onchange="changeBase()" /></td>
+            </tr>
+            <tr>
+              <td>文字サイズ</td>
+              <td><input type="range" id="base-size" name="base-size" value="18" min="4" max="48"
+                oninput="inputBaseSize(this.value)" onchange="changeBase()" /></td>
+            </tr>
+            <tr>
+              <td>フチの色</td>
+              <td><input type="color" id="base-bd-color" name="bd-color" value="#333333"
+                oninput="inputBaseBorder()" onchange="changeBase()" /></td>
+            </tr>
+            <tr>
+              <td>フチのサイズ</td>
+              <td><input type="range" id="base-bd-size" name="base-bd-size" value="1" min="0" max="3" disabled="disabled"
+                 oninput="inputBaseBorder()" onchange="changeBase()" /></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>フォント指定</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <label>
+
         </label>
         <br/>
-        <label>背景透明度
-          <input type="range" id="base-bg-alpha" name="bg-alpha" value="20" min="0" max="100" oninput="inputBgColor()" onchange="changeBase()" />
-        </label>
-        <br/>
-        背景色の透明度(スライダー 0-100 デフォ20、JSでは10で割る)
-        <br/>
-        ・フォント指定
+        <label>
+
+        ・
         <br/>
         各項目の表示、非表示設定
         <br/>
@@ -113,10 +159,45 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
       </div>
       <!-- アイコン設定 -->
       <div class="tab-content" id="setting-icon">
+        <table class="setting-table">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th>個別設定</th>
+              <th>項目</th>
+              <th>設定値</th>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="icon-disp" checked="checked" targetclass=".icon-block" disptype="block"
+                onchange="toggleTargetDisp(this)" /></td>
+              <td>表示する</td>
+              <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
+            </tr>
+            <tr>
+              <td>　</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>サイズ</td>
+              <td><input type="range" id="icon-size" name="icon-size" value="24" min="4" max="48"
+                oninput="inputIconSize(this.value)" onchange="changeIcon()" /></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>角丸</td>
+              <td><input type="range" id="icon-radius" name="icon-radius" value="50" min="0" max="50"
+                 oninput="inputIconRadius()" onchange="changeIcon()" /></td>
+            </tr>
+          </tbody>
+        </table>
+
         サイズ
         ・角丸(0-50 デフォ50)
         ・マージン
       </div>
+
+<!--------------------------------------------------------------------------------->
       <!-- レス設定 -->
       <div class="tab-content" id="setting-res">
 設定するときはチェックボックスをONにしてね。
@@ -131,21 +212,21 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
             </tr>
             <tr>
               <td><input type="checkbox" id="res-color-inherit" terget="res-color"
-                onchange="toggleTergetForm(this);inputResColor();changeRes()" /></td>
+                onchange="toggleTargetForm(this);inputResColor();changeRes()" /></td>
               <td>文字色</td>
               <td><input type="color" id="res-color" name="res-color" value="#ffffff" disabled="disabled"
                 oninput="inputResColor()" onchange="changeRes()" /></td>
             </tr>
             <tr>
               <td><input type="checkbox" id="res-size-inherit" terget="res-size"
-                onchange="toggleTergetForm(this);inputResSize();changeRes()" /></td>
+                onchange="toggleTargetForm(this);inputResSize();changeRes()" /></td>
               <td>文字サイズ</td>
-              <td><input type="range" id="res-size" name="res-size" value="18" min="4" max"72" disabled="disabled"
+              <td><input type="range" id="res-size" name="res-size" value="18" min="4" max="48" disabled="disabled"
                 oninput="inputResSize(this.value)" onchange="changeRes()" /></td>
             </tr>
             <tr>
               <td rowspan="2"><input type="checkbox" id="res-bd-size-inherit" terget="res-bd-size"
-                onchange="toggleTergetForm(this);inputResBorder();changeRes()" /></td>
+                onchange="toggleTargetForm(this);inputResBorder();changeRes()" /></td>
               <td>フチの色</td>
               <td><input type="color" id="res-bd-color" name="bd-color" value="#333333"
                 oninput="inputResBorder()" onchange="changeRes()" /></td>
@@ -162,49 +243,176 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
           ※フチの太さを最大にするとCSSがマジパネェことになるのでお気を付けください。
         </p>
       </div>
+
+      <!--------------------------------------------------------------------------------->
       <!-- レス番設定 -->
       <div class="tab-content" id="setting-number">
-        <label>文字色
-          <input type="color" id="num-color" name="num-color" value="#55ff55" oninput="inputNumColor(this.value)" onchange="changeNum()" />
-        </label>
-        <br/>
-        <label>文字サイズ
-          <input type="range" id="num-size" name="num-size" value="18" min="4" max"72" oninput="inputNumSize(this.value)" onchange="changeNum()" />
-        </label>
-        <br/>
-        <label>フチの色
-          <input type="color" id="num-bd-color" name="num-bd-color" value="#333333" oninput="inputNumBdColor(this.value)" onchange="changeNum()" />
-        </label>
-      </div>
-      <!-- 名前設定 -->
-      <div class="tab-content" id="setting-name">
-        <label>文字色
-          <input type="color" id="name-color" name="name-color" value="#55ff55" oninput="inputNameColor(this.value)" onchange="changeName()" />
-        </label>
-        <br/>
-        <label>文字サイズ
-          <input type="range" id="name-size" name="name-size" value="18" min="4" max"72" oninput="inputNameSize(this.value)" onchange="changeName()" />
-        </label>
-        <br/>
-        <label>フチの色
-          <input type="color" id="name-bd-color" name="name-bd-color" value="#333333" oninput="inputNameBdColor(this.value)" onchange="changeName()" />
-        </label>
-      </div>
-      <!-- 日付設定 -->
-      <div class="tab-content" id="setting-date">
-        <label>文字色
-          <input type="color" id="date-color" name="date-color" value="#feffa0" oninput="inputDateColor(this.value)" onchange="changeDate()" />
-        </label>
-        <br/>
-        <label>文字サイズ
-          <input type="range" id="date-size" name="date-size" value="14" min="4" max"72" oninput="inputDateSize(this.value)" onchange="changeDate()" />
-        </label>
-        <br/>
-        <label>フチの色
-          <input type="color" id="date-bd-color" name="date-bd-color" value="#333333" oninput="inputDateBdColor(this.value)" onchange="changeDate()" />
-        </label>
+        設定するときはチェックボックスをONにしてね。
+                <table class="setting-table">
+                  <thead>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>個別設定</th>
+                      <th>項目</th>
+                      <th>設定値</th>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="number-disp" checked="checked" targetclass=".resNumber" disptype="inline"
+                        onchange="toggleTargetDisp(this)" /></td>
+                      <td>表示する</td>
+                      <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
+                    </tr>
+                    <tr>
+                      <td>　</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="number-color-inherit" terget="number-color" checked="checked"
+                        onchange="toggleTargetForm(this);inputNumberColor();changeNumber()" /></td>
+                      <td>文字色</td>
+                      <td><input type="color" id="number-color" name="number-color" value="#55ff55"
+                        oninput="inputNumberColor()" onchange="changeNumber()" /></td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" id="number-size-inherit" terget="number-size"
+                        onchange="toggleTargetForm(this);inputNumberSize();changeNumber()" /></td>
+                      <td>文字サイズ</td>
+                      <td><input type="range" id="number-size" name="number-size" value="18" min="4" max="48" disabled="disabled"
+                        oninput="inputNumberSize(this.value)" onchange="changeNumber()" /></td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2"><input type="checkbox" id="number-bd-size-inherit" terget="number-bd-size"
+                        onchange="toggleTargetForm(this);inputNumberBorder();changeNumber()" /></td>
+                      <td>フチの色</td>
+                      <td><input type="color" id="number-bd-color" name="bd-color" value="#333333"
+                        oninput="inputNumberBorder()" onchange="changeNumber()" /></td>
+                    </tr>
+                    <tr>
+                      <td>フチのサイズ</td>
+                      <td><input type="range" id="number-bd-size" name="number-bd-size" value="1" min="0" max="3" disabled="disabled"
+                         oninput="inputNumberBorder()" onchange="changeNumber()" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <p>
+                  ※フチの太さを最大にするとCSSがマジパネェことになるのでお気を付けください。
+                </p>
       </div>
 
+      <!--------------------------------------------------------------------------------->
+      <!-- 名前設定 -->
+      <div class="tab-content" id="setting-name">
+        設定するときはチェックボックスをONにしてね。
+        <table class="setting-table">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th>個別設定</th>
+              <th>項目</th>
+              <th>設定値</th>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="name-disp" checked="checked" targetclass=".name" disptype="inline"
+                onchange="toggleTargetDisp(this)" /></td>
+              <td>表示する</td>
+              <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
+            </tr>
+            <tr>
+              <td>　</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="name-color-inherit" terget="name-color" checked="checked"
+                onchange="toggleTargetForm(this);inputNameColor();changeName()" /></td>
+              <td>文字色</td>
+              <td><input type="color" id="name-color" name="name-color" value="#55ff55"
+                oninput="inputNameColor()" onchange="changeName()" /></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="name-size-inherit" terget="name-size"
+                onchange="toggleTargetForm(this);inputNameSize();changeName()" /></td>
+              <td>文字サイズ</td>
+              <td><input type="range" id="name-size" name="name-size" value="18" min="4" max="48" disabled="disabled"
+                oninput="inputNameSize(this.value)" onchange="changeName()" /></td>
+            </tr>
+            <tr>
+              <td rowspan="2"><input type="checkbox" id="name-bd-size-inherit" terget="name-bd-size"
+                onchange="toggleTargetForm(this);inputNameBorder();changeName()" /></td>
+              <td>フチの色</td>
+              <td><input type="color" id="name-bd-color" name="bd-color" value="#333333"
+                oninput="inputNameBorder()" onchange="changeName()" /></td>
+            </tr>
+            <tr>
+              <td>フチのサイズ</td>
+              <td><input type="range" id="name-bd-size" name="name-bd-size" value="1" min="0" max="3" disabled="disabled"
+                 oninput="inputNameBorder()" onchange="changeName()" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          ※フチの太さを最大にするとCSSがマジパネェことになるのでお気を付けください。
+        </p>
+      </div>
+
+      <!--------------------------------------------------------------------------------->
+      <!-- 日付設定 -->
+      <div class="tab-content" id="setting-date">
+        設定するときはチェックボックスをONにしてね。
+        <table class="setting-table">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th>個別設定</th>
+              <th>項目</th>
+              <th>設定値</th>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="date-disp" checked="checked" targetclass=".date" disptype="inline"
+                onchange="toggleTargetDisp(this)" /></td>
+              <td>表示する</td>
+              <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
+            </tr>
+            <tr>
+              <td>　</td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="date-color-inherit" terget="date-color" checked="checked"
+                onchange="toggleTargetForm(this);inputDateColor();changeDate()" /></td>
+              <td>文字色</td>
+              <td><input type="color" id="date-color" name="date-color" value="#feffa0"
+                oninput="inputDateColor()" onchange="changeDate()" /></td>
+            </tr>
+            <tr>
+              <td><input type="checkbox" id="date-size-inherit" terget="date-size" checked="checked"
+                onchange="toggleTargetForm(this);inputDateSize();changeDate()" /></td>
+              <td>文字サイズ</td>
+              <td><input type="range" id="date-size" name="date-size" value="14" min="4" max="48"
+                oninput="inputDateSize(this.value)" onchange="changeDate()" /></td>
+            </tr>
+            <tr>
+              <td rowspan="2"><input type="checkbox" id="date-bd-size-inherit" terget="date-bd-size"
+                onchange="toggleTargetForm(this);inputDateBorder();changeDate()" /></td>
+              <td>フチの色</td>
+              <td><input type="color" id="date-bd-color" name="bd-color" value="#333333"
+                oninput="inputDateBorder()" onchange="changeDate()" /></td>
+            </tr>
+            <tr>
+              <td>フチのサイズ</td>
+              <td><input type="range" id="date-bd-size" name="date-bd-size" value="1" min="0" max="3" disabled="disabled"
+                 oninput="inputDateBorder()" onchange="changeDate()" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          ※フチの太さを最大にするとCSSがマジパネェことになるのでお気を付けください。
+        </p>
+      </div>
+
+      <!--------------------------------------------------------------------------------->
       <!-- ポイント -->
       <div class="tab-content" id="tips-tab">
         <h4>良い感じのCSSにするポイント</h4>

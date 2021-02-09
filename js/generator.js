@@ -79,7 +79,8 @@ function changeGeneral() {
 ///////////////////////////////////////
 var resCss = ''; //CSS出力用変数
 //レスカラー変更
-function inputResColor(color) {
+function inputResColor() {
+  var color = $('#res-color').val();
   if($('#res-color-inherit').prop('checked'))
   {
     //ピッカーの値を取得
@@ -93,7 +94,7 @@ function inputResColor(color) {
 }
 
 //レスサイズ変更、行の高さも変更する
-function inputResSize(size) {
+function inputResSize() {
   //サイズ取得
   var size = $('#res-size').val();
   if($('#res-size-inherit').prop('checked'))

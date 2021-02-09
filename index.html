@@ -88,13 +88,13 @@
 
       <!-- 全般設定 -->
       <div class="tab-content" id="setting-general">
-
+ho
         <label>背景色
-          <input type="color" id="bg-color" name="bg-color" value="#000000" oninput="inputBgColor()" onchange="changeGeneral()" />
+          <input type="color" id="base-bg-color" name="bg-color" value="#000000" oninput="inputBgColor()" onchange="changeBase()" />
         </label>
         <br/>
         <label>背景透明度
-          <input type="range" id="bg-alpha" name="bg-alpha" value="20" min="0" max="100" oninput="inputBgColor()" onchange="changeGeneral()" />
+          <input type="range" id="base-bg-alpha" name="bg-alpha" value="20" min="0" max="100" oninput="inputBgColor()" onchange="changeBase()" />
         </label>
         <br/>
         背景色の透明度(スライダー 0-100 デフォ20、JSでは10で割る)
@@ -134,7 +134,7 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
                 onchange="toggleTergetForm(this);inputResColor();changeRes()" /></td>
               <td>文字色</td>
               <td><input type="color" id="res-color" name="res-color" value="#ffffff" disabled="disabled"
-                oninput="inputResColor(this.value)" onchange="changeRes()" /></td>
+                oninput="inputResColor()" onchange="changeRes()" /></td>
             </tr>
             <tr>
               <td><input type="checkbox" id="res-size-inherit" terget="res-size"
@@ -219,7 +219,7 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
 <h4>文字のフチに関して</h4>
 ※フチの太さに関してはCSSでtext-stroke というものがあるのですが
 これは使い勝手がイマイチなのでtext-shadowを使ってフチを表現しています。
-文字のフチ取りに関していい方法ご存知の方はご一報をください。
+そのせいでフチを太くするとCSSの量がマジパネェことになるのは許して・・・。
 
       </div>
 

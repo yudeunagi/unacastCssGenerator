@@ -21,7 +21,7 @@
           </span>
           <div class="content">
             <span class="resNumber">257</span>
-            <span class="name">名も無きWarrior</span><span class="date">2021/01/25(月) 14:44:54.02</span><br>
+            <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:54.02</span><br>
             <span class="res">
               Hey Siri!!
             </span>
@@ -33,7 +33,7 @@
           </span>
           <div class="content">
             <span class="resNumber">256</span>
-            <span class="name">名も無きWarrior</span><span class="date">2021/01/25(月) 14:44:29.09</span><br>
+            <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:29.09</span><br>
             <span class="res">
               Welcome to Osiri Land...
             </span>
@@ -45,7 +45,7 @@
           </span>
           <div class="content">
             <span class="resNumber">255</span>
-            <span class="name">名も無きWarrior</span><span class="date">2021/01/25(月) 14:44:01.91</span><br>
+            <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:01.91</span><br>
             <span class="res">
               y)おしりらんど。<br>
               はーじまーるよー！！
@@ -65,7 +65,7 @@
   <content>
     <div class="tabs">
       <input id="general-tab" type="radio" name="tab_item" checked>
-      <label class="tab_item" for="general-tab">総合</label>
+      <label class="tab_item" for="general-tab">全般</label>
 
       <input id="icon-tab" type="radio" name="tab_item">
       <label class="tab_item" for="icon-tab">アイコン</label>
@@ -118,7 +118,7 @@
             </tr>
             <tr>
               <td>フチのサイズ</td>
-              <td><input type="range" id="base-bd-size" name="base-bd-size" value="1" min="0" max="3" disabled="disabled"
+              <td><input type="range" id="base-bd-size" name="base-bd-size" value="1" min="0" max="3"
                  oninput="inputBaseBorder()" onchange="changeBase()" /></td>
             </tr>
             <tr>
@@ -131,7 +131,7 @@
             </tr>
             <tr>
               <td>フォント指定</td>
-              <td></td>
+              <td>みじっそうです・・・</td>
             </tr>
             <tr>
               <td></td>
@@ -145,16 +145,10 @@
         <br/>
         <label>
 
-        ・
         <br/>
-        各項目の表示、非表示設定
+        Todo：実際の配信レイアウトをイメージしやすいように、1280x720の枠を用意して、レス表示部のサイズを設定できるようにする
         <br/>
-        1280x720の大本divを用意する、レス表示部のサイズを設定できるようにする
-        <br/>
-        ラ時をボタンで左寄せ、右寄せと 上寄せ、下寄せの設定
-
-CSSジェネレータ、個別に設定するのでなくてまず親となる設定を決めて
-親の設定を継承するか個別に設定するかできるようにしたほうがいい気がしてきた。
+        ラジオボタンで左寄せ、右寄せと 上寄せ、下寄せの設定はできるようにすると実際のレイアウトをイメージしやすいかも
 
       </div>
       <!-- アイコン設定 -->
@@ -187,7 +181,13 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
               <td></td>
               <td>角丸</td>
               <td><input type="range" id="icon-radius" name="icon-radius" value="50" min="0" max="50"
-                 oninput="inputIconRadius()" onchange="changeIcon()" /></td>
+                 oninput="inputIconRadius(this.value)" onchange="changeIcon()" /></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>右側の余白</td>
+              <td><input type="range" id="icon-margin" name="icon-margin" value="2" min="0" max="20"
+                 oninput="inputIconMargin(this.value)" onchange="changeIcon()" /></td>
             </tr>
           </tbody>
         </table>
@@ -417,6 +417,7 @@ CSSジェネレータ、個別に設定するのでなくてまず親となる�
       <div class="tab-content" id="tips-tab">
         <h4>良い感じのCSSにするポイント</h4>
         <ul>
+          <li>基本的には「全般」「アイコン」タブでサイズを調整して残りのタブで色を選ぶ、という使い方が綺麗にまとまると思います。</li>
           <li>文字の色を原色（<font color="#ff0000">真っ赤</font>とか<font color="#0000ff">真っ青</font>とか）にすると読みづらいので
             レス表示部の色は白や黒、又は薄めの色を選ぶと良いです。</li>
           <li>名前やレス番号は比較的濃い色でも何とかなります。</li>

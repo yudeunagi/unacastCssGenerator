@@ -82,14 +82,86 @@ function inputBgColor(color) {
 
   $("body").css( { 'background-color' : rgba });
 }
-//入力完了字にCSS出力
-function changeGeneral() {
+
+//レスサイズ変更、行の高さも変更する
+function inputBaseSize() {
+  //サイズ取得
+  var size = $('#base-size').val();
+  $("body").css( { 'font-size' : size+'px' ,'line-height' : size*1.3+'px'});
+}
+
+//ボーダーカラー変更
+var baseShadow = '1px 1px 0 #333, -1px 1px 0 #333, 1px -1px 0 #333, -1px -1px 0 #333'; //デフォルト値
+var baseBdSize = '1';
+function inputBaseBorder() {
+  var s = $('#base-bd-size').val();
+  var col = $('#base-bd-color').val();
+
+  baseShadow = generateTextShadowCss(s,col);
+  $("body").css( { 'text-shadow' : baseShadow});
+}
+
+//入力完了時にCSS出力
+function changeBase() {
   var bgColor = $("#bg-color").val();
-  resGeneral =
+  var baseSize = $("#base-size").val();
+  var baseHeight = Math.ceil(baseSize * 1.3);
+
+  baseCss =
   '/*全般的な設定です*/' + '\n' +
   'body {' + '\n' +
   '  background-color:' + rgba + ';' + '\n' +
+  '  font-size:' + baseSize + 'px;' + '\n' +
+  '  line-height:' + baseHeight + 'px;' + '\n' +
+  '  text-shadow:' + baseShadow + ';' + '\n' +
   '}' + '\n';
+  //CSS出力
+  outputCSS();
+}
+
+///////////////////////////////////////
+////アイコン表示部変更////
+///////////////////////////////////////
+var iconCss = ''; //CSS出力用変数
+
+//アイコンサイズ変更
+function inputIconSize(size){
+  $("img.icon").css( {'width' : size+'px', 'height' : size+'px'});
+  $(".icon-block").css( {'width' : size+'px'});
+}
+
+//アイコン角丸度変更
+function inputIconRadius(val){
+  $("img.icon").css( {'border-radius' : val+'%'});
+}
+
+//アイコン余白変更
+function inputIconMargin(val){
+  $(".icon-block").css( {'margin-right' : (val / 10.0)+'em'});
+}
+
+//入力完了時にCSS出力
+function changeIcon() {
+  var iconSize = $("#icon-size").val();
+  var iconRadius = $("#icon-radius").val();
+  var iconMargin = $("#icon-margin").val();
+  iconMargin /= 10.0;
+  console.log(iconMargin);
+//iconMargin = 0.2;
+  iconCss =
+  '' + '\n' +
+  '/*アイコンの設定です*/' + '\n' +
+  'img.icon {' + '\n' +
+  '  width:' + iconSize + 'px;' + '\n' +
+  '  height:' + iconSize + 'px;' + '\n' +
+  '  border-radius:' + iconRadius + '%;' + '\n' +
+  '}' + '\n' +
+  '\n' +
+  '.icon-block {' + '\n' +
+  '  width:' + iconSize + 'px;' + '\n' +
+  '  margin-right:' + iconMargin + 'em;' + '\n' +
+  '}' + '\n';
+
   //CSS出力
   outputCSS();
 }
@@ -435,7 +507,7 @@ function changeDate() {
 function outputCSS()
 {
   //テキストエリアへ反映
-  var result = baseCss + resCss + numCss + nameCss + dateCss;
+  var result = baseCss + iconCss + resCss + numCss + nameCss + dateCss;
   //console.log(result);
   $("#outputText").val(result);
 }

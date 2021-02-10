@@ -17,7 +17,7 @@ div#stream-area{
   background-image: url("../img/bg_image.png");
   position: static;
   transform-origin:0px 0px;
-  overflow: hidden;
+  overflow: hidden; /* レス表示エリアのはみ出し防止 */
   /* 画面幅によってサイズを変えたい */
   transform:  scale(0.75) translate(0%, 0%);
 
@@ -28,7 +28,9 @@ div#parent{
   position:absolute;
   top:0px;
   left:0px;
+  width:960px;
   background-color: rgba(0, 0, 0, 0.2); /*レス表示部の背景色＆不透明度*/
+  overflow: hidden; /* レスはみ出し防止 */
 }
 
 /*CSS出力部の設定*/

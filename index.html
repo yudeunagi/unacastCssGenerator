@@ -142,12 +142,28 @@
                  oninput="inputBaseBorder()" onchange="changeBase()" /></td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td>表示サイズ・位置オプション</td>
+              <td>以下の設定はCSSでは出力されません、実際の運用時はOBS側で調整してください</td>
             </tr>
             <tr>
-              <td></td>
-              <td></td>
+              <td>レス表示枠の横幅</td>
+              <td><input type="range" id="resarea-width" name="resarea-width" value="960" min="160" max="1280"
+                oninput="inputResAreaSize()"/></td>
+            </tr>
+            <tr>
+              <td>レス表示枠の高さ</td>
+              <td><input type="range" id="resarea-height" name="resarea-height" value="720" min="80" max="720"
+                oninput="inputResAreaSize()"/></td>
+            </tr>
+            <tr>
+              <td>レス表示枠の位置(横)</td>
+              <td><input type="range" id="resposition-left" name="resposition-left" value="0" min="0" max="1280"
+                oninput="inputResAreaPosition()"/></td>
+            </tr>
+            <tr>
+              <td>レス表示枠の位置(縦)</td>
+              <td><input type="range" id="resposition-top" name="resposition-top" value="0" min="0" max="720"
+                oninput="inputResAreaPosition()"/></td>
             </tr>
             <tr>
               <td>フォント指定</td>
@@ -214,10 +230,6 @@
             </tr>
           </tbody>
         </table>
-
-        サイズ
-        ・角丸(0-50 デフォ50)
-        ・マージン
       </div>
 
 <!--------------------------------------------------------------------------------->

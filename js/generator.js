@@ -119,6 +119,21 @@ function changeBase() {
   outputCSS();
 }
 
+//レス表示エリアの横幅変更
+function inputResAreaSize() {
+  var w = $("#resarea-width").val();
+  var h = $("#resarea-height").val();
+  $("div#parent").css( { 'width' : w+'px', 'height' : h+'px'});
+}
+
+//レス表示エリアの位置変更
+function inputResAreaPosition() {
+  var l = $("#resposition-left").val();
+  var t = $("#resposition-top").val();
+  $("div#parent").css( { 'left' : l+'px', 'top' : t+'px'});
+}
+
+
 ///////////////////////////////////////
 ////アイコン表示部変更////
 ///////////////////////////////////////

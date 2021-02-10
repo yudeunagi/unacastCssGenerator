@@ -48,6 +48,29 @@ textarea#outputText{
 /*テーブル*/
 table.setting-table{
   color : #333;
+  border-collapse: collapse;
+  width: 600px;
+}
+
+/*テーブルレイアウト*/
+th.item{
+  width: 130px;
+}
+
+/*設定値の横幅*/
+th.value{
+  width: 100px;
+}
+
+/**/
+td.checkbox{
+  text-align: center;
+}
+/*テーブルの項目に余白*/
+table.setting-table td
+,table.setting-table th
+{
+  padding: 6px;
 }
 
 /*タブ切り替え全体のスタイル*/
@@ -65,7 +88,7 @@ table.setting-table{
 
 /*タブのスタイル*/
 .tab_item {
-  width: calc(100%/7);
+  width: calc(100%/8);
   height: 50px;
   border-bottom: 3px solid #5ab4bd;
   background-color: #e6e6e6;
@@ -98,6 +121,7 @@ input[name="tab_item"] {
 
 
 /*選択されているタブのコンテンツのみを表示*/
+#layout-tab:checked ~ #setting-layout,
 #general-tab:checked ~ #setting-general,
 #icon-tab:checked ~ #setting-icon,
 #res-tab:checked ~ #setting-res,

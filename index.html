@@ -84,7 +84,10 @@
   <!-- ここから設定部 -->
   <content>
     <div class="tabs">
-      <input id="general-tab" type="radio" name="tab_item" checked>
+      <input id="layout-tab" type="radio" name="tab_item" checked>
+      <label class="tab_item" for="layout-tab">レイアウト</label>
+
+      <input id="general-tab" type="radio" name="tab_item">
       <label class="tab_item" for="general-tab">全般</label>
 
       <input id="icon-tab" type="radio" name="tab_item">
@@ -105,16 +108,52 @@
       <input id="tips-tab" type="radio" name="tab_item">
       <label class="tab_item" for="tips-tab">TIPS</label>
 
+      <!-- レイアウト設定 -->
+      <div class="tab-content" id="setting-layout">
+        <table class="setting-table" border="1">
+          <thead>
+            レス表示枠の設定。
+          </thead>
+          <tbody>
+            <tr>
+              <th class="item">項目</th>
+              <th>設定値</th>
+            </tr>
+            <tr>
+              <td>サイズ(横)</td>
+              <td><input type="range" id="resarea-width" name="resarea-width" value="960" min="160" max="1280"
+                oninput="inputResAreaSize()"/></td>
+            </tr>
+            <tr>
+              <td>サイズ(縦)</td>
+              <td><input type="range" id="resarea-height" name="resarea-height" value="720" min="80" max="720"
+                oninput="inputResAreaSize()"/></td>
+            </tr>
+            <tr>
+              <td>位置(横)</td>
+              <td><input type="range" id="resposition-left" name="resposition-left" value="0" min="0" max="1280"
+                oninput="inputResAreaPosition()"/></td>
+            </tr>
+            <tr>
+              <td>位置(縦)</td>
+              <td><input type="range" id="resposition-top" name="resposition-top" value="0" min="0" max="720"
+                oninput="inputResAreaPosition()"/></td>
+            </tr>
+
+          </tbody>
+        </table>
+        <p><br>※ 上記の設定はCSSでは出力されません、実際の運用時はOBS側で調整してください</p>
+      </div>
 
       <!-- 全般設定 -->
       <div class="tab-content" id="setting-general">
-        <table class="setting-table">
+        <table class="setting-table" border="1">
           <thead>
           </thead>
           <tbody>
             <tr>
-              <th>項目</th>
-              <th>設定値</th>
+              <th class="item">項目</th>
+              <th class="value">設定値</th>
             </tr>
             <tr>
               <td>背景色</td>
@@ -142,88 +181,45 @@
                  oninput="inputBaseBorder()" onchange="changeBase()" /></td>
             </tr>
             <tr>
-              <td>表示サイズ・位置オプション</td>
-              <td>以下の設定はCSSでは出力されません、実際の運用時はOBS側で調整してください</td>
-            </tr>
-            <tr>
-              <td>レス表示枠の横幅</td>
-              <td><input type="range" id="resarea-width" name="resarea-width" value="960" min="160" max="1280"
-                oninput="inputResAreaSize()"/></td>
-            </tr>
-            <tr>
-              <td>レス表示枠の高さ</td>
-              <td><input type="range" id="resarea-height" name="resarea-height" value="720" min="80" max="720"
-                oninput="inputResAreaSize()"/></td>
-            </tr>
-            <tr>
-              <td>レス表示枠の位置(横)</td>
-              <td><input type="range" id="resposition-left" name="resposition-left" value="0" min="0" max="1280"
-                oninput="inputResAreaPosition()"/></td>
-            </tr>
-            <tr>
-              <td>レス表示枠の位置(縦)</td>
-              <td><input type="range" id="resposition-top" name="resposition-top" value="0" min="0" max="720"
-                oninput="inputResAreaPosition()"/></td>
-            </tr>
-            <tr>
               <td>フォント指定</td>
               <td>みじっそうです・・・</td>
             </tr>
-            <tr>
-              <td></td>
-              <td></td>
-            </tr>
           </tbody>
         </table>
-        <label>
-
-        </label>
         <br/>
-        <label>
 
         <br/>
-        Todo：実際の配信レイアウトをイメージしやすいように、1280x720の枠を用意して、レス表示部のサイズを設定できるようにする
-        <br/>
-        ラジオボタンで左寄せ、右寄せと 上寄せ、下寄せの設定はできるようにすると実際のレイアウトをイメージしやすいかも
-        <br/>
-        1280x720の枠そのままだと環境によっては画面が見ずらいので画面幅によって縮小するようにする（CSSメディアクエリでできると思う）
-
-
+        Todo：1280x720の枠そのままだと環境によっては画面が見ずらいので画面幅によって縮小するようにする（CSSメディアクエリでできると思う）
       </div>
+
       <!-- アイコン設定 -->
       <div class="tab-content" id="setting-icon">
-        <table class="setting-table">
+        <p>
+          <input type="checkbox" id="icon-disp" checked="checked" targetclass=".icon-block" disptype="block"
+            onchange="toggleTargetDisp(this)" />
+          <label for="icon-disp">
+            アイコンを表示する
+          </label>
+        </p>
+        <table class="setting-table" border="1">
           <thead>
           </thead>
           <tbody>
             <tr>
-              <th>個別設定</th>
-              <th>項目</th>
-              <th>設定値</th>
+              <th class="item">項目</th>
+              <th class="value">設定値</th>
             </tr>
             <tr>
-              <td><input type="checkbox" id="icon-disp" checked="checked" targetclass=".icon-block" disptype="block"
-                onchange="toggleTargetDisp(this)" /></td>
-              <td>表示する</td>
-              <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
-            </tr>
-            <tr>
-              <td>　</td>
-            </tr>
-            <tr>
-              <td></td>
               <td>サイズ</td>
               <td><input type="range" id="icon-size" name="icon-size" value="24" min="4" max="48"
                 oninput="inputIconSize(this.value)" onchange="changeIcon()" /></td>
             </tr>
             <tr>
-              <td></td>
               <td>角丸</td>
               <td><input type="range" id="icon-radius" name="icon-radius" value="50" min="0" max="50"
                  oninput="inputIconRadius(this.value)" onchange="changeIcon()" /></td>
             </tr>
             <tr>
-              <td></td>
               <td>右側の余白</td>
               <td><input type="range" id="icon-margin" name="icon-margin" value="2" min="0" max="20"
                  oninput="inputIconMargin(this.value)" onchange="changeIcon()" /></td>
@@ -236,31 +232,31 @@
       <!-- レス設定 -->
       <div class="tab-content" id="setting-res">
 設定するときはチェックボックスをONにしてね。
-        <table class="setting-table">
+        <table class="setting-table" class="setting-table" border="1">
           <thead>
           </thead>
           <tbody>
             <tr>
-              <th>個別設定</th>
-              <th>項目</th>
-              <th>設定値</th>
+              <th></th>
+              <th class="item">項目</th>
+              <th class="value">設定値</th>
             </tr>
             <tr>
-              <td><input type="checkbox" id="res-color-inherit" terget="res-color"
+              <td class="checkbox"><input type="checkbox" id="res-color-inherit" terget="res-color"
                 onchange="toggleTargetForm(this);inputResColor();changeRes()" /></td>
               <td>文字色</td>
               <td><input type="color" id="res-color" name="res-color" value="#ffffff" disabled="disabled"
                 oninput="inputResColor()" onchange="changeRes()" /></td>
             </tr>
             <tr>
-              <td><input type="checkbox" id="res-size-inherit" terget="res-size"
+              <td class="checkbox"><input type="checkbox" id="res-size-inherit" terget="res-size"
                 onchange="toggleTargetForm(this);inputResSize();changeRes()" /></td>
               <td>文字サイズ</td>
               <td><input type="range" id="res-size" name="res-size" value="18" min="4" max="48" disabled="disabled"
                 oninput="inputResSize(this.value)" onchange="changeRes()" /></td>
             </tr>
             <tr>
-              <td rowspan="2"><input type="checkbox" id="res-bd-size-inherit" terget="res-bd-size"
+              <td rowspan="2" class="checkbox"><input type="checkbox" id="res-bd-size-inherit" terget="res-bd-size"
                 onchange="toggleTargetForm(this);inputResBorder();changeRes()" /></td>
               <td>フチの色</td>
               <td><input type="color" id="res-bd-color" name="bd-color" value="#333333"
@@ -282,41 +278,42 @@
       <!--------------------------------------------------------------------------------->
       <!-- レス番設定 -->
       <div class="tab-content" id="setting-number">
-        設定するときはチェックボックスをONにしてね。
-                <table class="setting-table">
-                  <thead>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>個別設定</th>
-                      <th>項目</th>
-                      <th>設定値</th>
+        <p>
+          <input type="checkbox" id="number-disp" checked="checked" targetclass=".resNumber" disptype="inline"
+            onchange="toggleTargetDisp(this)" />
+          <label for="number-disp">
+            レス番を表示する
+          </label>
+        </p>
+        <p>
+          設定するときはチェックボックスをONにしてね。
+        </p>
+
+        <table class="setting-table" border="1">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <th></th>
+              <th class="item">項目</th>
+              <th class="value">設定値</th>
+            </tr>
+            <tr>
+              <td class="checkbox"><input type="checkbox" id="number-color-inherit" terget="number-color" checked="checked"
+                onchange="toggleTargetForm(this);inputNumberColor();changeNumber()" /></td>
+              <td>文字色</td>
+              <td><input type="color" id="number-color" name="number-color" value="#55ff55"
+                oninput="inputNumberColor()" onchange="changeNumber()" /></td>
                     </tr>
                     <tr>
-                      <td><input type="checkbox" id="number-disp" checked="checked" targetclass=".resNumber" disptype="inline"
-                        onchange="toggleTargetDisp(this)" /></td>
-                      <td>表示する</td>
-                      <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
-                    </tr>
-                    <tr>
-                      <td>　</td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" id="number-color-inherit" terget="number-color" checked="checked"
-                        onchange="toggleTargetForm(this);inputNumberColor();changeNumber()" /></td>
-                      <td>文字色</td>
-                      <td><input type="color" id="number-color" name="number-color" value="#55ff55"
-                        oninput="inputNumberColor()" onchange="changeNumber()" /></td>
-                    </tr>
-                    <tr>
-                      <td><input type="checkbox" id="number-size-inherit" terget="number-size"
+                      <td class="checkbox"><input type="checkbox" id="number-size-inherit" terget="number-size"
                         onchange="toggleTargetForm(this);inputNumberSize();changeNumber()" /></td>
                       <td>文字サイズ</td>
                       <td><input type="range" id="number-size" name="number-size" value="18" min="4" max="48" disabled="disabled"
                         oninput="inputNumberSize(this.value)" onchange="changeNumber()" /></td>
                     </tr>
                     <tr>
-                      <td rowspan="2"><input type="checkbox" id="number-bd-size-inherit" terget="number-bd-size"
+                      <td rowspan="2" class="checkbox"><input type="checkbox" id="number-bd-size-inherit" terget="number-bd-size"
                         onchange="toggleTargetForm(this);inputNumberBorder();changeNumber()" /></td>
                       <td>フチの色</td>
                       <td><input type="color" id="number-bd-color" name="bd-color" value="#333333"
@@ -338,41 +335,41 @@
       <!--------------------------------------------------------------------------------->
       <!-- 名前設定 -->
       <div class="tab-content" id="setting-name">
-        設定するときはチェックボックスをONにしてね。
-        <table class="setting-table">
+        <p>
+          <input type="checkbox" id="name-disp" checked="checked" targetclass=".name" disptype="inline"
+            onchange="toggleTargetDisp(this)" />
+          <label for="name-disp">
+            名前を表示する
+          </label>
+        </p>
+        <p>
+          設定するときはチェックボックスをONにしてね。
+        </p>
+        <table class="setting-table" border="1">
           <thead>
           </thead>
           <tbody>
             <tr>
-              <th>個別設定</th>
-              <th>項目</th>
-              <th>設定値</th>
+              <th></th>
+              <th class="item">項目</th>
+              <th class="value">設定値</th>
             </tr>
             <tr>
-              <td><input type="checkbox" id="name-disp" checked="checked" targetclass=".name" disptype="inline"
-                onchange="toggleTargetDisp(this)" /></td>
-              <td>表示する</td>
-              <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
-            </tr>
-            <tr>
-              <td>　</td>
-            </tr>
-            <tr>
-              <td><input type="checkbox" id="name-color-inherit" terget="name-color" checked="checked"
+              <td class="checkbox"><input type="checkbox" id="name-color-inherit" terget="name-color" checked="checked"
                 onchange="toggleTargetForm(this);inputNameColor();changeName()" /></td>
               <td>文字色</td>
               <td><input type="color" id="name-color" name="name-color" value="#55ff55"
                 oninput="inputNameColor()" onchange="changeName()" /></td>
             </tr>
             <tr>
-              <td><input type="checkbox" id="name-size-inherit" terget="name-size"
+              <td class="checkbox"><input type="checkbox" id="name-size-inherit" terget="name-size"
                 onchange="toggleTargetForm(this);inputNameSize();changeName()" /></td>
               <td>文字サイズ</td>
               <td><input type="range" id="name-size" name="name-size" value="18" min="4" max="48" disabled="disabled"
                 oninput="inputNameSize(this.value)" onchange="changeName()" /></td>
             </tr>
             <tr>
-              <td rowspan="2"><input type="checkbox" id="name-bd-size-inherit" terget="name-bd-size"
+              <td rowspan="2" class="checkbox"><input type="checkbox" id="name-bd-size-inherit" terget="name-bd-size"
                 onchange="toggleTargetForm(this);inputNameBorder();changeName()" /></td>
               <td>フチの色</td>
               <td><input type="color" id="name-bd-color" name="bd-color" value="#333333"
@@ -394,24 +391,22 @@
       <!--------------------------------------------------------------------------------->
       <!-- 日付設定 -->
       <div class="tab-content" id="setting-date">
-        設定するときはチェックボックスをONにしてね。
-        <table class="setting-table">
-          <thead>
-          </thead>
+        <p>
+          <input type="checkbox" id="date-disp" checked="checked" targetclass=".date" disptype="inline"
+            onchange="toggleTargetDisp(this)" />
+          <label for="date-disp">
+            日付を表示する
+          </label>
+        </p>
+        <p>
+          設定するときはチェックボックスをONにしてね。
+        </p>
+        <table class="setting-table" border="1">
           <tbody>
             <tr>
-              <th>個別設定</th>
-              <th>項目</th>
-              <th>設定値</th>
-            </tr>
-            <tr>
-              <td><input type="checkbox" id="date-disp" checked="checked" targetclass=".date" disptype="inline"
-                onchange="toggleTargetDisp(this)" /></td>
-              <td>表示する</td>
-              <td>表示/非表示設定はunacastの設定画面で変更可能です</td>
-            </tr>
-            <tr>
-              <td>　</td>
+              <th></th>
+              <th class="item">項目</th>
+              <th class="value">設定値</th>
             </tr>
             <tr>
               <td><input type="checkbox" id="date-color-inherit" terget="date-color" checked="checked"

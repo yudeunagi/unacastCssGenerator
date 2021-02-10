@@ -3,12 +3,32 @@ body{
   overflow: auto; /*スクロールバー表示*/
 }
 
+
 /*サンプル表示部の高さ設定*/
 div#generator-container {
-  height: auto;
+  /* 画面幅によってサイズを変えたい */
+  width: 960;
+  height: 540;
 }
+
+div#stream-area{
+  width: 1280px;
+  height: 720px;
+  background-image: url("../img/bg_image.png");
+  position: static;
+  transform-origin:0px 0px;
+  overflow: hidden;
+  /* 画面幅によってサイズを変えたい */
+  transform:  scale(0.75) translate(0%, 0%);
+
+
+}
+
 div#parent{
-  height: auto;
+  position:absolute;
+  top:0px;
+  left:0px;
+  background-color: rgba(0, 0, 0, 0.2); /*レス表示部の背景色＆不透明度*/
 }
 
 /*CSS出力部の設定*/

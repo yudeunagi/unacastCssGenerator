@@ -13,17 +13,19 @@
 
   <!-- ここがレス表示サンプル部分、ここも実際のOBSのレイアウトのように調整できるようにしたい（願望）-->
   <div id="generator-container">
+  <!--配信画面サイズを想定したエリア-->
+  <div id="stream-area">
     <div id="parent">
       <ul id="res-list" class="brakeOn">
         <li class="list-item">
           <span class="icon-block">
-            <img class="icon" src="./img/random/peca.png">
+            <img class="icon" src="./img/kote/teriko.png">
           </span>
           <div class="content">
-            <span class="resNumber">257</span>
-            <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:54.02</span><br>
+            <span class="resNumber"></span>
+            <span class="name">Yudeunagi</span><span class="date"></span><br>
             <span class="res">
-              Hey Siri!!
+              これはUnacast向けのCSSジェネレータです
             </span>
           </div>
         </li>
@@ -35,7 +37,24 @@
             <span class="resNumber">256</span>
             <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:29.09</span><br>
             <span class="res">
-              Welcome to Osiri Land...
+              ・使い方<br/>
+              １．全般タブで背景色と背景透明度や全体的な文字サイズを決めます<br/>
+              ２．アイコンタブでアイコンのサイズや角丸具合を決めます<br/>
+              ３．レス表示や名前欄等の色、サイズを個別に設定したい場合は。<br/>
+              　　項目名の横にあるチェックボックスをONにしてください<br/>
+              　　（チェックOFFの場合はデフォ設定、または全般タブで設定した値を使います）
+            </span>
+          </div>
+        </li>
+        <li class="list-item">
+          <span class="icon-block">
+            <img class="icon" src="./img/random/peca.png">
+          </span>
+          <div class="content">
+            <span class="resNumber">255</span>
+            <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:01.91</span><br>
+            <span class="res">
+              ご意見、ご要望はきゃすけのコメント欄まで
             </span>
           </div>
         </li>
@@ -44,22 +63,22 @@
             <img class="icon" src="./img/random/suta_1.png">
           </span>
           <div class="content">
-            <span class="resNumber">255</span>
+            <span class="resNumber">256</span>
             <span class="name">名無しさん</span><span class="date">2021/01/25(月) 14:44:01.91</span><br>
             <span class="res">
-              y)おしりらんど。<br>
-              はーじまーるよー！！
+              y)おしーーーーりしーーーーりしーーーーりしーーーーりらーーーーんどーーーーーーーーーー
             </span>
           </div>
         </li>
         <li id="initMessage">
           <span class="icon"> </span>
-          <span class="name">お尻ランド開園</span>
+          <span class="name">レス読み込みを開始しました</span>
           <span class="res"> </span>
         </li>
       </ul>
     </div>
   </div>
+</div>
 
   <!-- ここから設定部 -->
   <content>
@@ -149,6 +168,9 @@
         Todo：実際の配信レイアウトをイメージしやすいように、1280x720の枠を用意して、レス表示部のサイズを設定できるようにする
         <br/>
         ラジオボタンで左寄せ、右寄せと 上寄せ、下寄せの設定はできるようにすると実際のレイアウトをイメージしやすいかも
+        <br/>
+        1280x720の枠そのままだと環境によっては画面が見ずらいので画面幅によって縮小するようにする（CSSメディアクエリでできると思う）
+
 
       </div>
       <!-- アイコン設定 -->

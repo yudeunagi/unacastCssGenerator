@@ -80,7 +80,7 @@ function inputBgColor(color) {
   // その中で${変数名} って書くと変数使えるけど存在に慣れない。
   rgba = `rgba(${bgColor[0]}, ${bgColor[1]}, ${bgColor[2]}, ${bgAlpha})`;
 
-  $("body").css( { 'background-color' : rgba });
+  $("div#parent").css( { 'background-color' : rgba });
 }
 
 //レスサイズ変更、行の高さも変更する

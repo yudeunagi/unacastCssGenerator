@@ -67,6 +67,37 @@ function toggleTargetDisp(obj){
 }
 
 ///////////////////////////////////////
+////レイアウト////
+///////////////////////////////////////
+
+//レス表示エリアの横幅変更
+function inputResAreaSize() {
+  var w = $("#resarea-width").val();
+  var h = $("#resarea-height").val();
+  $("div#parent").css( { 'width' : w+'px', 'height' : h+'px'});
+}
+
+//レス表示エリアの位置変更
+function inputResAreaPosition() {
+  var l = $("#resposition-left").val();
+  var t = $("#resposition-top").val();
+  $("div#parent").css( { 'left' : l+'px', 'top' : t+'px'});
+}
+//プレビューサイズ
+let PREVIEW_SIZE = [
+  [640,360,0.50]
+  ,[960,540,0.75]
+  ,[1280,720,1.00]
+]
+function inputPreviewSize(val){
+  //プレビュー枠の設定
+  $("div#generator-container").css( { 'width' : `${PREVIEW_SIZE[val][0]}px`, 'height' : `${PREVIEW_SIZE[val][1]}px`});
+  //拡大率の変更
+  $("#stream-area").css( {'transform' : `scale(${PREVIEW_SIZE[val][2]}) translate(0%, 0%)`})
+}
+
+
+///////////////////////////////////////
 ////全般変更////
 ///////////////////////////////////////
 var baseCss = ''; //CSS出力用変数
@@ -118,21 +149,6 @@ function changeBase() {
   //CSS出力
   outputCSS();
 }
-
-//レス表示エリアの横幅変更
-function inputResAreaSize() {
-  var w = $("#resarea-width").val();
-  var h = $("#resarea-height").val();
-  $("div#parent").css( { 'width' : w+'px', 'height' : h+'px'});
-}
-
-//レス表示エリアの位置変更
-function inputResAreaPosition() {
-  var l = $("#resposition-left").val();
-  var t = $("#resposition-top").val();
-  $("div#parent").css( { 'left' : l+'px', 'top' : t+'px'});
-}
-
 
 ///////////////////////////////////////
 ////アイコン表示部変更////

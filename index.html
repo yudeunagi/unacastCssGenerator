@@ -120,6 +120,21 @@
               <th>設定値</th>
             </tr>
             <tr>
+              <td>プレビューサイズ</td>
+              <td>
+                <label for="preview-size-small">小</label>
+                <input type="radio" id="preview-size-small" name="preview-size" value="0"
+                oninput="inputPreviewSize(this.value)"/>
+                <label for="preview-size-middle">中</label>
+                <input type="radio" id="preview-size-middle" name="preview-size" value="1" checked="checked"
+                oninput="inputPreviewSize(this.value)"/>
+                <label for="preview-size-large">大</label>
+                <input type="radio" id="preview-size-large" name="preview-size" value="2"
+                oninput="inputPreviewSize(this.value)"/>
+
+              </td>
+            </tr>
+            <tr>
               <td>サイズ(横)</td>
               <td><input type="range" id="resarea-width" name="resarea-width" value="960" min="160" max="1280"
                 oninput="inputResAreaSize()"/></td>
@@ -189,7 +204,9 @@
         <br/>
 
         <br/>
-        Todo：1280x720の枠そのままだと環境によっては画面が見ずらいので画面幅によって縮小するようにする（CSSメディアクエリでできると思う）
+        Todo：1280x720の枠そのままだと環境によっては画面が見ずらいので画面幅によって縮小するようにする（CSSメディアクエリでできると思う）<br>
+        もしくはラジオボタンでプレビューサイズ切り替え（自由に切り替えられた方が良い気がする）
+
       </div>
 
       <!-- アイコン設定 -->
